@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import Folder from "./components/folder";
