@@ -116,7 +116,7 @@ function Thought(props) {
 }
 
 export default Thought;
-
+// vercel
 Thought.propTypes = {
   thought: PropTypes.object,
   folder: PropTypes.object,
