@@ -13,14 +13,18 @@ function App() {
 
   // onLoad Get Requests
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/folder").then(function (response) {
-      setAllFolders(response.data);
-      console.log(response);
-    });
-    axios.get("http://127.0.0.1:8000/thought").then(function (response) {
-      setAllThoughts(response.data);
-      console.log(response);
-    });
+    axios
+      .get("https://thought-org.herokuapp.com/folder")
+      .then(function (response) {
+        setAllFolders(response.data);
+        console.log(response);
+      });
+    axios
+      .get("https://thought-org.herokuapp.com/thought")
+      .then(function (response) {
+        setAllThoughts(response.data);
+        console.log(response);
+      });
   }, []);
   // Post Requests
   async function newThoughtPost(name, thought) {
@@ -30,15 +34,19 @@ function App() {
       thought: [thought],
     };
     await axios
-      .post("http://127.0.0.1:8000/folder", data)
+      .post("https://thought-org.herokuapp.com/folder", data)
       .then((response) => {
         setLoading(false);
-        axios.get("http://127.0.0.1:8000/folder").then(function (response) {
-          setAllFolders(response.data);
-        });
-        axios.get("http://127.0.0.1:8000/thought").then(function (response) {
-          setAllThoughts(response.data);
-        });
+        axios
+          .get("https://thought-org.herokuapp.com/folder")
+          .then(function (response) {
+            setAllFolders(response.data);
+          });
+        axios
+          .get("https://thought-org.herokuapp.com/thought")
+          .then(function (response) {
+            setAllThoughts(response.data);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -52,13 +60,15 @@ function App() {
       thought: [thought],
     };
     await axios
-      .post("http://127.0.0.1:8000/folder/new/", data)
+      .post("https://thought-org.herokuapp.com/folder/new/", data)
       .then((response) => {
         setLoading(false);
         thoughtPut(thought_id, thought, dashboard, response.data.id);
-        axios.get("http://127.0.0.1:8000/folder").then(function (response) {
-          setAllFolders(response.data);
-        });
+        axios
+          .get("https://thought-org.herokuapp.com/folder")
+          .then(function (response) {
+            setAllFolders(response.data);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -72,12 +82,14 @@ function App() {
       folder: folder_id,
     };
     await axios
-      .post("http://127.0.0.1:8000/thought", data)
+      .post("https://thought-org.herokuapp.com/thought", data)
       .then((response) => {
         setLoading(false);
-        axios.get("http://127.0.0.1:8000/thought").then(function (response) {
-          setAllThoughts(response.data);
-        });
+        axios
+          .get("https://thought-org.herokuapp.com/thought")
+          .then(function (response) {
+            setAllThoughts(response.data);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -93,12 +105,14 @@ function App() {
       toggle: toggle,
     };
     await axios
-      .put("http://127.0.0.1:8000/folder/" + folder_id, data)
+      .put("https://thought-org.herokuapp.com/folder/" + folder_id, data)
       .then(function (response) {
         setLoading(false);
-        axios.get("http://127.0.0.1:8000/folder").then(function (response) {
-          setAllFolders(response.data);
-        });
+        axios
+          .get("https://thought-org.herokuapp.com/folder")
+          .then(function (response) {
+            setAllFolders(response.data);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -113,12 +127,14 @@ function App() {
       folder: folder_id,
     };
     await axios
-      .put("http://127.0.0.1:8000/thought/" + thought_id, data)
+      .put("https://thought-org.herokuapp.com/thought/" + thought_id, data)
       .then(function (response) {
         setLoading(false);
-        axios.get("http://127.0.0.1:8000/thought").then(function (response) {
-          setAllThoughts(response.data);
-        });
+        axios
+          .get("https://thought-org.herokuapp.com/thought")
+          .then(function (response) {
+            setAllThoughts(response.data);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -128,24 +144,30 @@ function App() {
   // delete requests
   async function thoughtDelete(thought_id) {
     await axios
-      .delete("http://127.0.0.1:8000/thought/" + thought_id)
+      .delete("https://thought-org.herokuapp.com/thought/" + thought_id)
       .then((response) =>
-        axios.get("http://127.0.0.1:8000/thought").then(function (response) {
-          setAllThoughts(response.data);
-        })
+        axios
+          .get("https://thought-org.herokuapp.com/thought")
+          .then(function (response) {
+            setAllThoughts(response.data);
+          })
       );
   }
   async function folderDelete(thought_id) {
     await axios
-      .delete("http://127.0.0.1:8000/folder/" + thought_id)
+      .delete("https://thought-org.herokuapp.com/folder/" + thought_id)
       .then((response) => {
         setLoading(false);
-        axios.get("http://127.0.0.1:8000/folder").then(function (response) {
-          setAllFolders(response.data);
-        });
-        axios.get("http://127.0.0.1:8000/thought").then(function (response) {
-          setAllThoughts(response.data);
-        });
+        axios
+          .get("https://thought-org.herokuapp.com/folder")
+          .then(function (response) {
+            setAllFolders(response.data);
+          });
+        axios
+          .get("https://thought-org.herokuapp.com/thought")
+          .then(function (response) {
+            setAllThoughts(response.data);
+          });
       })
       .catch((err) => {
         console.log(err);
