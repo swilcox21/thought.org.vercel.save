@@ -7,14 +7,14 @@ import PropTypes from "prop-types";
 function NewThought(props) {
   const [thought, setThought] = useState({ thought: "" });
   const [allFolders, setAllFolders] = useState(props.allFolders);
-  const [folderValue, setFolderValue] = useState("1. thought");
+  const [folderValue, setFolderValue] = useState("1. tasks");
   const [folderPlaceholder, setFolderPlaceholder] = useState("");
 
   return (
     <>
       <div>
         <input
-          className="borderBottomRight col-3 col-md-3"
+          className="borderNone col-3 col-md-3"
           placeholder={folderValue}
           defaultValue={folderPlaceholder}
           value={folderPlaceholder}
