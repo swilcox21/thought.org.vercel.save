@@ -52,7 +52,7 @@ function NewThought(props) {
             setThought({ thought: "" });
           }}
         >
-          SUGMIT
+          SUBMIT
         </button>
       </div>
     </>
