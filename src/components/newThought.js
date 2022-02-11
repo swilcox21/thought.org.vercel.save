@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 function NewThought(props) {
   const [thought, setThought] = useState({ thought: "" });
   const [allFolders, setAllFolders] = useState(props.allFolders);
-  const [folderValue, setFolderValue] = useState("thought");
+  const [folderValue, setFolderValue] = useState("1. thought");
   const [folderPlaceholder, setFolderPlaceholder] = useState("");
 
   return (
@@ -37,7 +37,7 @@ function NewThought(props) {
         </datalist>
         <TextareaAutosize
           id="textareaautosize"
-          className="pl-2 col-12 activeTodo py-1"
+          className="col-12 activeTodo py-1 pl-2"
           placeholder="Type your Thought here"
           type="text"
           defaultValue={""}

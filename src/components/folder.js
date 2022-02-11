@@ -11,7 +11,7 @@ function Folder(props) {
 
   return (
     <div className="mb-4">
-      <div className="d-flex">
+      <div className="d-flex mx-xl-5">
         <h4
           onClick={() => {
             setToggle(!toggle);

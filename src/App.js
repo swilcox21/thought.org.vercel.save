@@ -5,7 +5,8 @@ import axios from "axios";
 import Folder from "./components/folder";
 import Thought from "./components/thought";
 import NewThought from "./components/newThought";
-// vercel
+import Navbar from "./components/navbar";
+
 function App() {
   const [loading, setLoading] = useState(false);
   const [allFolders, setAllFolders] = useState({});
@@ -176,8 +177,10 @@ function App() {
   }
   // HTML code
   return (
-    <div className="App container-fluid">
-      <h1>I love my girlfriend</h1>
+    <div className="App container-fluid col-md-8 col-lg-6 col-xl-5">
+      <Navbar allFolders={allFolders} folderPut={folderPut} />
+      <br />
+      <br />
       {allThoughts.length > 0 &&
         allThoughts
           .filter((thought) => thought.dashboard === true)
@@ -195,27 +198,31 @@ function App() {
               <br />
             </div>
           ))}
-      <NewThought
-        newThoughtPost={newThoughtPost}
-        allFolders={allFolders}
-        allThoughts={allThoughts}
-      />
+      <div className="my-3">
+        <NewThought
+          newThoughtPost={newThoughtPost}
+          allFolders={allFolders}
+          allThoughts={allThoughts}
+        />
+      </div>
       {allFolders.length > 0 &&
-        allFolders.map((folder, index) => (
-          <div key={folder.id}>
-            <Folder
-              folderPost={folderPost}
-              thoughtPost={thoughtPost}
-              thoughtPut={thoughtPut}
-              folderPut={folderPut}
-              folderDelete={folderDelete}
-              thoughtDelete={thoughtDelete}
-              folder={folder}
-              allFolders={allFolders}
-              allThoughts={allThoughts}
-            />
-          </div>
-        ))}
+        allFolders
+          .filter((folder) => folder.dashboard === true)
+          .map((folder, index) => (
+            <div key={folder.id}>
+              <Folder
+                folderPost={folderPost}
+                thoughtPost={thoughtPost}
+                thoughtPut={thoughtPut}
+                folderPut={folderPut}
+                folderDelete={folderDelete}
+                thoughtDelete={thoughtDelete}
+                folder={folder}
+                allFolders={allFolders}
+                allThoughts={allThoughts}
+              />
+            </div>
+          ))}
     </div>
   );
 }

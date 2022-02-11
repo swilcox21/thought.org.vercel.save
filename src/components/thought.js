@@ -14,9 +14,9 @@ function Thought(props) {
 
   return (
     <>
-      <div>
+      <div className="d-flex justify-content-center col-xl-8 mx-auto">
         <input
-          className="borderBottomRight col-3 col-md-3"
+          className="borderBottomRight col-2"
           placeholder={props.folder.name}
           defaultValue={folderPlaceholder}
           value={folderPlaceholder}
@@ -59,7 +59,7 @@ function Thought(props) {
         </datalist>
         <TextareaAutosize
           id="textareaautosize"
-          className="pl-2 col-12 activeTodo py-1"
+          className="col-9 activeTodo py-1 pl-2"
           placeholder="Type your Thought here"
           type="text"
           defaultValue={props.thought.thought}
@@ -77,7 +77,7 @@ function Thought(props) {
             )
           }
         />
-        <div className="dropdown">
+        <div className="dropleft">
           <span
             className=""
             id="dropdownMenuButton"
