@@ -2,11 +2,47 @@
   text-align: center;
 }
 
+/* border styles */
 .borderNone {
   border: none;
 }
-
 .borderRight {
   border: none;
   border-right: 1px dotted;
+}
+.borderBottom {
+  border: none;
+  border-bottom: 1px dotted;
+}
+.borderBottomRight {
+  border: none;
+  border-bottom: 1px dotted;
+  border-right: 1px dotted;
+}
+
+/* Custom Navbar  */
+.closed {
+  position: fixed;
+  border-bottom: 1px solid black;
+  min-width: 100%;
+  z-index: 2;
+  background-color: slategray;
+}
+.open {
+  position: fixed;
+  border-bottom: 1px solid black;
+  min-width: 100%;
+  z-index: 2;
+  background-color: slategray;
+}
+
+/* thought */
+.activeTodo:focus {
+  min-height: 130px;
+  overflow: scroll;
+}
+.activeTodo {
+  max-height: 50px;
+  min-height: 50px;
+  overflow: hidden;
 }

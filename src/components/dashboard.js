@@ -1,0 +1,75 @@
+/* eslint-disable no-unused-vars */
+import '../App.css';
+import React, { useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
+import PropTypes from 'prop-types';
+
+function Dashboard(props) {
+  const [thought, setThought] = useState(props.thought.thought);
+  const [dashboard, setDashboard] = useState(props.thought.dashboard);
+
+  return (
+    <>
+      <div className="d-flex justify-content-center col-xl-8 mx-auto">
+        <TextareaAutosize
+          id="textareaautosize"
+          className="col-10 borderNone ml-1 py-1 pl-2"
+          placeholder="Type your Thought here"
+          type="text"
+          defaultValue={props.thought.thought}
+          onChange={(e) => {
+            setThought(e.target.value);
+            setDashboard(props.thought.dashboard);
+          }}
+          onBlur={(e) =>
+            thought !== props.thought.thought &&
+            props.thoughtPut(props.thought.id, thought, props.thought.dashboard, props.folder.id)
+          }
+        />
+        <div className="dropleft">
+          <span
+            className=""
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            &nbsp;&nbsp;
+            <i className="fas fa-cog"></i>
+          </span>
+          <div className="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+            <small className="borderBottom">{props.folder.name}</small>
+            <div
+              className="text-center"
+              onClick={() =>
+                props.thoughtPut(
+                  props.thought.id,
+                  props.thought.thought,
+                  !props.thought.dashboard,
+                  props.thought.folder.id,
+                )
+              }
+            >
+              DB
+            </div>
+            <div className="text-center" onClick={() => props.thoughtDelete(props.thought.id)}>
+              X
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Dashboard;
+// vercel
+Dashboard.propTypes = {
+  thought: PropTypes.object,
+  folder: PropTypes.object,
+  allFolders: PropTypes.array,
+  allThoughts: PropTypes.array,
+  thoughtPut: PropTypes.func,
+  folderPost: PropTypes.func,
+  thoughtDelete: PropTypes.func,
+};

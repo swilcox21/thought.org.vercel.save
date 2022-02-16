@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
-import "../App.css";
-import React, { useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
-import PropTypes from "prop-types";
+import '../App.css';
+import React, { useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
+import PropTypes from 'prop-types';
 
 function NewThought(props) {
-  const [thought, setThought] = useState({ thought: "" });
+  const [thought, setThought] = useState({ thought: '' });
   const [allFolders, setAllFolders] = useState(props.allFolders);
-  const [folderValue, setFolderValue] = useState("1. tasks");
-  const [folderPlaceholder, setFolderPlaceholder] = useState("");
+  const [folderValue, setFolderValue] = useState('1. tasks');
+  const [folderPlaceholder, setFolderPlaceholder] = useState('');
 
   return (
     <>
-      <div>
+      <div className="d-flex col-8 mx-auto mb-2">
         <input
-          className="borderNone col-3 col-md-3"
+          className="borderBottomRight col-3 col-md-3"
           placeholder={folderValue}
           defaultValue={folderPlaceholder}
           value={folderPlaceholder}
@@ -22,7 +22,7 @@ function NewThought(props) {
             setFolderValue(e.target.value);
             setFolderPlaceholder(e.target.value);
           }}
-          onBlur={() => setFolderPlaceholder("")}
+          onBlur={() => setFolderPlaceholder('')}
           list="folders"
           name="folder"
           id="folder"
@@ -37,24 +37,24 @@ function NewThought(props) {
         </datalist>
         <TextareaAutosize
           id="textareaautosize"
-          className="col-12 activeTodo py-1 pl-2"
+          className="col-9 borderBottom py-1 pl-2"
           placeholder="Type your Thought here"
           type="text"
-          defaultValue={""}
+          defaultValue={''}
           value={thought.thought}
           onChange={(e) => {
             setThought({ thought: e.target.value });
           }}
         />
-        <button
-          onClick={() => {
-            props.newThoughtPost(folderValue, thought);
-            setThought({ thought: "" });
-          }}
-        >
-          SUBMIT
-        </button>
       </div>
+      <button
+        onClick={() => {
+          props.newThoughtPost(folderValue, thought);
+          setThought({ thought: '' });
+        }}
+      >
+        SUBMIT
+      </button>
     </>
   );
 }
