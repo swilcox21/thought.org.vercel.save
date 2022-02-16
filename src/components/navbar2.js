@@ -10,7 +10,7 @@ function Navbar(props) {
   return (
     <>
       {toggle === true ? (
-        <div className="open">
+        <div className="open py-2">
           <div className="d-flex justify-content-between">
             <span>Forever</span>
             <button onClick={() => setToggle(!toggle)}>=</button>
@@ -32,7 +32,7 @@ function Navbar(props) {
             ))}
         </div>
       ) : (
-        <div className="closed d-flex justify-content-between">
+        <div className="closed d-flex justify-content-between py-2">
           <span>Forever</span>
           <button onClick={() => setToggle(!toggle)}>=</button>
         </div>
