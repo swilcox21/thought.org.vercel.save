@@ -6,6 +6,7 @@ import Folder from './components/folder';
 import Thought from './components/thought';
 import NewThought from './components/newThought';
 import Navbar from './components/navbar2';
+import Dashboard from './components/dashboard';
 
 function App() {
   const [loading, setLoading] = useState(false);
