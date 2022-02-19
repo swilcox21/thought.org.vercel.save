@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import axios from "axios";
-import Folder from "./components/folder";
-import Thought from "./components/thought";
-import NewThought from "./components/newThought";
-import Navbar from "./components/navbar2";
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import axios from 'axios';
+import Folder from './components/folder';
+import Thought from './components/thought';
+import NewThought from './components/newThought';
+import Navbar from './components/navbar2';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -14,18 +14,14 @@ function App() {
 
   // onLoad Get Requests
   useEffect(() => {
-    axios
-      .get("https://thought-org.herokuapp.com/folder")
-      .then(function (response) {
-        setAllFolders(response.data);
-        console.log(response);
-      });
-    axios
-      .get("https://thought-org.herokuapp.com/thought")
-      .then(function (response) {
-        setAllThoughts(response.data);
-        console.log(response);
-      });
+    axios.get('https://thought-org.herokuapp.com/folder').then(function (response) {
+      setAllFolders(response.data);
+      console.log(response);
+    });
+    axios.get('https://thought-org.herokuapp.com/thought').then(function (response) {
+      setAllThoughts(response.data);
+      console.log(response);
+    });
   }, []);
   // Post Requests
   async function newThoughtPost(name, thought) {
@@ -35,19 +31,15 @@ function App() {
       thought: [thought],
     };
     await axios
-      .post("https://thought-org.herokuapp.com/folder", data)
+      .post('https://thought-org.herokuapp.com/folder', data)
       .then((response) => {
         setLoading(false);
-        axios
-          .get("https://thought-org.herokuapp.com/folder")
-          .then(function (response) {
-            setAllFolders(response.data);
-          });
-        axios
-          .get("https://thought-org.herokuapp.com/thought")
-          .then(function (response) {
-            setAllThoughts(response.data);
-          });
+        axios.get('https://thought-org.herokuapp.com/folder').then(function (response) {
+          setAllFolders(response.data);
+        });
+        axios.get('https://thought-org.herokuapp.com/thought').then(function (response) {
+          setAllThoughts(response.data);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -61,15 +53,13 @@ function App() {
       thought: [thought],
     };
     await axios
-      .post("https://thought-org.herokuapp.com/folder/new/", data)
+      .post('https://thought-org.herokuapp.com/folder/new/', data)
       .then((response) => {
         setLoading(false);
         thoughtPut(thought_id, thought, dashboard, response.data.id);
-        axios
-          .get("https://thought-org.herokuapp.com/folder")
-          .then(function (response) {
-            setAllFolders(response.data);
-          });
+        axios.get('https://thought-org.herokuapp.com/folder').then(function (response) {
+          setAllFolders(response.data);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -83,14 +73,12 @@ function App() {
       folder: folder_id,
     };
     await axios
-      .post("https://thought-org.herokuapp.com/thought", data)
+      .post('https://thought-org.herokuapp.com/thought', data)
       .then((response) => {
         setLoading(false);
-        axios
-          .get("https://thought-org.herokuapp.com/thought")
-          .then(function (response) {
-            setAllThoughts(response.data);
-          });
+        axios.get('https://thought-org.herokuapp.com/thought').then(function (response) {
+          setAllThoughts(response.data);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -106,14 +94,12 @@ function App() {
       toggle: toggle,
     };
     await axios
-      .put("https://thought-org.herokuapp.com/folder/" + folder_id, data)
+      .put('https://thought-org.herokuapp.com/folder/' + folder_id, data)
       .then(function (response) {
         setLoading(false);
-        axios
-          .get("https://thought-org.herokuapp.com/folder")
-          .then(function (response) {
-            setAllFolders(response.data);
-          });
+        axios.get('https://thought-org.herokuapp.com/folder').then(function (response) {
+          setAllFolders(response.data);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -128,14 +114,12 @@ function App() {
       folder: folder_id,
     };
     await axios
-      .put("https://thought-org.herokuapp.com/thought/" + thought_id, data)
+      .put('https://thought-org.herokuapp.com/thought/' + thought_id, data)
       .then(function (response) {
         setLoading(false);
-        axios
-          .get("https://thought-org.herokuapp.com/thought")
-          .then(function (response) {
-            setAllThoughts(response.data);
-          });
+        axios.get('https://thought-org.herokuapp.com/thought').then(function (response) {
+          setAllThoughts(response.data);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -144,31 +128,23 @@ function App() {
   }
   // delete requests
   async function thoughtDelete(thought_id) {
-    await axios
-      .delete("https://thought-org.herokuapp.com/thought/" + thought_id)
-      .then((response) =>
-        axios
-          .get("https://thought-org.herokuapp.com/thought")
-          .then(function (response) {
-            setAllThoughts(response.data);
-          })
-      );
+    await axios.delete('https://thought-org.herokuapp.com/thought/' + thought_id).then((response) =>
+      axios.get('https://thought-org.herokuapp.com/thought').then(function (response) {
+        setAllThoughts(response.data);
+      }),
+    );
   }
   async function folderDelete(thought_id) {
     await axios
-      .delete("https://thought-org.herokuapp.com/folder/" + thought_id)
+      .delete('https://thought-org.herokuapp.com/folder/' + thought_id)
       .then((response) => {
         setLoading(false);
-        axios
-          .get("https://thought-org.herokuapp.com/folder")
-          .then(function (response) {
-            setAllFolders(response.data);
-          });
-        axios
-          .get("https://thought-org.herokuapp.com/thought")
-          .then(function (response) {
-            setAllThoughts(response.data);
-          });
+        axios.get('https://thought-org.herokuapp.com/folder').then(function (response) {
+          setAllFolders(response.data);
+        });
+        axios.get('https://thought-org.herokuapp.com/thought').then(function (response) {
+          setAllThoughts(response.data);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -188,12 +164,12 @@ function App() {
             .filter((thought) => thought.dashboard === true)
             .map((thot, index) => (
               <div key={thot.id} className="my-3">
-                <Thought
-                  folderPost={folderPost}
+                <Dashboard
+                  // folderPost={folderPost}
                   thoughtPut={thoughtPut}
                   thought={thot}
                   folder={thot.folder}
-                  allFolders={allFolders}
+                  // allFolders={allFolders}
                   allThoughts={allThoughts}
                   thoughtDelete={thoughtDelete}
                 />
@@ -211,9 +187,7 @@ function App() {
         {/* TASKS DASHBOARD */}
         {allFolders.length > 0 &&
           allFolders
-            .filter(
-              (folder) => (folder.dashboard === true) & (folder.name === "tasks")
-            )
+            .filter((folder) => (folder.dashboard === true) & (folder.name === 'tasks'))
             .map((folder, index) => (
               <div key={folder.id}>
                 <Folder
@@ -232,9 +206,7 @@ function App() {
         {/* ALL OTHER FOLDERS DASHBOARD */}
         {allFolders.length > 0 &&
           allFolders
-            .filter(
-              (folder) => (folder.dashboard === true) & (folder.name !== "tasks")
-            )
+            .filter((folder) => (folder.dashboard === true) & (folder.name !== 'tasks'))
             .map((folder, index) => (
               <div key={folder.id}>
                 <Folder
