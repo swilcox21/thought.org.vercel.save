@@ -33,7 +33,7 @@ function Navbar(props) {
         </div>
       ) : (
         <div className="closed d-flex justify-content-between py-2">
-          <span>Forever</span>
+          <span>Thought.Org</span>
           <button onClick={() => setToggle(!toggle)}>=</button>
         </div>
       )}
