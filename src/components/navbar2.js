@@ -12,7 +12,7 @@ function Navbar(props) {
       {toggle === true ? (
         <div className="open py-2">
           <div className="d-flex justify-content-between">
-            <span>Forever</span>
+            <span>Thought.Org</span>
             <button onClick={() => setToggle(!toggle)}>=</button>
           </div>
           {props.allFolders.length > 0 &&
