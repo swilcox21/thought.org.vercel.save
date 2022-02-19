@@ -177,79 +177,81 @@ function App() {
   }
   // HTML code
   return (
-    <div className="App container-fluid col-md-8 col-lg-6 col-xl-5">
+    <>
       <Navbar allFolders={allFolders} folderPut={folderPut} />
-      <br />
-      <br />
-      {/* DASHBOARD */}
-      {allThoughts.length > 0 &&
-        allThoughts
-          .filter((thought) => thought.dashboard === true)
-          .map((thot, index) => (
-            <div key={thot.id} className="my-3">
-              <Thought
-                folderPost={folderPost}
-                thoughtPut={thoughtPut}
-                thought={thot}
-                folder={thot.folder}
-                allFolders={allFolders}
-                allThoughts={allThoughts}
-                thoughtDelete={thoughtDelete}
-              />
-              <br />
-            </div>
-          ))}
-      {/* NEW THOUGHT */}
-      <div className="my-3">
-        <NewThought
-          newThoughtPost={newThoughtPost}
-          allFolders={allFolders}
-          allThoughts={allThoughts}
-        />
+      <div className="App container-fluid col-md-8 col-lg-6 col-xl-5">
+        <br />
+        <br />
+        {/* DASHBOARD */}
+        {allThoughts.length > 0 &&
+          allThoughts
+            .filter((thought) => thought.dashboard === true)
+            .map((thot, index) => (
+              <div key={thot.id} className="my-3">
+                <Thought
+                  folderPost={folderPost}
+                  thoughtPut={thoughtPut}
+                  thought={thot}
+                  folder={thot.folder}
+                  allFolders={allFolders}
+                  allThoughts={allThoughts}
+                  thoughtDelete={thoughtDelete}
+                />
+                <br />
+              </div>
+            ))}
+        {/* NEW THOUGHT */}
+        <div className="my-3">
+          <NewThought
+            newThoughtPost={newThoughtPost}
+            allFolders={allFolders}
+            allThoughts={allThoughts}
+          />
+        </div>
+        {/* TASKS DASHBOARD */}
+        {allFolders.length > 0 &&
+          allFolders
+            .filter(
+              (folder) => (folder.dashboard === true) & (folder.name === "tasks")
+            )
+            .map((folder, index) => (
+              <div key={folder.id}>
+                <Folder
+                  folderPost={folderPost}
+                  thoughtPost={thoughtPost}
+                  thoughtPut={thoughtPut}
+                  folderPut={folderPut}
+                  folderDelete={folderDelete}
+                  thoughtDelete={thoughtDelete}
+                  folder={folder}
+                  allFolders={allFolders}
+                  allThoughts={allThoughts}
+                />
+              </div>
+            ))}
+        {/* ALL OTHER FOLDERS DASHBOARD */}
+        {allFolders.length > 0 &&
+          allFolders
+            .filter(
+              (folder) => (folder.dashboard === true) & (folder.name !== "tasks")
+            )
+            .map((folder, index) => (
+              <div key={folder.id}>
+                <Folder
+                  folderPost={folderPost}
+                  thoughtPost={thoughtPost}
+                  thoughtPut={thoughtPut}
+                  folderPut={folderPut}
+                  folderDelete={folderDelete}
+                  thoughtDelete={thoughtDelete}
+                  folder={folder}
+                  allFolders={allFolders}
+                  allThoughts={allThoughts}
+                />
+              </div>
+            ))}
       </div>
-      {/* TASKS DASHBOARD */}
-      {allFolders.length > 0 &&
-        allFolders
-          .filter(
-            (folder) => (folder.dashboard === true) & (folder.name === "tasks")
-          )
-          .map((folder, index) => (
-            <div key={folder.id}>
-              <Folder
-                folderPost={folderPost}
-                thoughtPost={thoughtPost}
-                thoughtPut={thoughtPut}
-                folderPut={folderPut}
-                folderDelete={folderDelete}
-                thoughtDelete={thoughtDelete}
-                folder={folder}
-                allFolders={allFolders}
-                allThoughts={allThoughts}
-              />
-            </div>
-          ))}
-      {/* ALL OTHER FOLDERS DASHBOARD */}
-      {allFolders.length > 0 &&
-        allFolders
-          .filter(
-            (folder) => (folder.dashboard === true) & (folder.name !== "tasks")
-          )
-          .map((folder, index) => (
-            <div key={folder.id}>
-              <Folder
-                folderPost={folderPost}
-                thoughtPost={thoughtPost}
-                thoughtPut={thoughtPut}
-                folderPut={folderPut}
-                folderDelete={folderDelete}
-                thoughtDelete={thoughtDelete}
-                folder={folder}
-                allFolders={allFolders}
-                allThoughts={allThoughts}
-              />
-            </div>
-          ))}
-    </div>
+    </>
   );
 }
 
