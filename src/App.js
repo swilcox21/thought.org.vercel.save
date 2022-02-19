@@ -5,7 +5,7 @@ import axios from "axios";
 import Folder from "./components/folder";
 import Thought from "./components/thought";
 import NewThought from "./components/newThought";
-import Navbar from "./components/navbar";
+import Navbar from "./components/navbar2";
 
 function App() {
   const [loading, setLoading] = useState(false);
