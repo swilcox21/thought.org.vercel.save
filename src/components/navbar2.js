@@ -10,10 +10,11 @@ function Navbar(props) {
   return (
     <>
       {toggle === true ? (
-        <div className="open py-2">
-          <div className="d-flex justify-content-between">
-            <span>Thought.Org</span>
-            <button onClick={() => setToggle(!toggle)}>=</button>
+        <div className={window.innerWidth > 1000 ? 'sideNav scrollbar' : 'sideNavSmall scrollbar'}>
+          <div className="d-flex justify-content-end">
+            <button className="m-4" onClick={() => setToggle(!toggle)}>
+              =
+            </button>
           </div>
           {props.allFolders.length > 0 &&
             props.allFolders.map((folder, index) => (
@@ -32,9 +33,10 @@ function Navbar(props) {
             ))}
         </div>
       ) : (
-        <div className="closed d-flex justify-content-between py-2">
-          <span>Thought.Org</span>
-          <button onClick={() => setToggle(!toggle)}>=</button>
+        <div className="sideNavClosed">
+          <button className="m-4" onClick={() => setToggle(!toggle)}>
+            =
+          </button>
         </div>
       )}
     </>
