@@ -1,12 +1,12 @@
-import "../App.css";
-import React, { useState } from "react";
-import Thought from "./thought";
-import PropTypes from "prop-types";
+import '../App.css';
+import React, { useState } from 'react';
+import Thought from './thought';
+import PropTypes from 'prop-types';
 
 function Folder(props) {
-  const [folderName, setFolderName] = useState("");
+  const [folderName, setFolderName] = useState('');
   const [toggle, setToggle] = useState(props.folder.toggle);
-  const [thought, setThought] = useState("");
+  const [thought, setThought] = useState('');
   const [dashboard, setDashboard] = useState(props.folder.dashboard);
 
   return (
@@ -15,12 +15,7 @@ function Folder(props) {
         <h4
           onClick={() => {
             setToggle(!toggle);
-            props.folderPut(
-              props.folder.id,
-              props.folder.name,
-              props.folder.dashboard,
-              !toggle
-            );
+            props.folderPut(props.folder.id, props.folder.name, props.folder.dashboard, !toggle);
           }}
         >
           {props.folder.name}
@@ -37,16 +32,14 @@ function Folder(props) {
               props.folder.id,
               props.folder.name,
               !props.folder.dashboard,
-              props.folder.toggle
+              props.folder.toggle,
             );
             setDashboard(!dashboard);
           }}
         >
           [
           {props.allThoughts.length > 0 &&
-            props.allThoughts.filter(
-              (thought) => thought.folder.id === props.folder.id
-            ).length}
+            props.allThoughts.filter((thought) => thought.folder.id === props.folder.id).length}
           ]&nbsp;
         </span>
         <div className="dropdown">
@@ -73,10 +66,7 @@ function Folder(props) {
               onChange={(e) => setFolderName(e.target.value)}
               onBlur={() => props.folderPut(props.folder.id, folderName)}
             />
-            <div
-              className="text-center"
-              onClick={() => props.folderDelete(props.folder.id)}
-            >
+            <div className="text-center" onClick={() => props.folderDelete(props.folder.id)}>
               X
             </div>
           </div>
@@ -86,9 +76,7 @@ function Folder(props) {
         ? props.allThoughts.length > 0 &&
           props.allThoughts
             .filter(
-              (thought) =>
-                (thought.folder.id === props.folder.id) &
-                (thought.dashboard === false)
+              (thought) => (thought.folder.id === props.folder.id) & (thought.dashboard === false),
             )
             .map((thought, index) => (
               <div key={thought.id}>

@@ -10,8 +10,8 @@ import Dashboard from './components/dashboard';
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [allFolders, setAllFolders] = useState({});
-  const [allThoughts, setAllThoughts] = useState({});
+  const [allFolders, setAllFolders] = useState([]);
+  const [allThoughts, setAllThoughts] = useState([]);
 
   // onLoad Get Requests
   useEffect(() => {
@@ -178,11 +178,13 @@ function App() {
             ))}
         {/* NEW THOUGHT */}
         <div className="my-3">
-          <NewThought
-            newThoughtPost={newThoughtPost}
-            allFolders={allFolders}
-            allThoughts={allThoughts}
-          />
+          {allFolders.length > 0 && (
+            <NewThought
+              newThoughtPost={newThoughtPost}
+              allFolders={allFolders}
+              allThoughts={allThoughts}
+            />
+          )}
         </div>
         {/* REMINDERS DASHBOARD */}
         {allThoughts.length > 0 &&
