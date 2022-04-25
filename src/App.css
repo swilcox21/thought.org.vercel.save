@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 /* border styles */
 .borderNone {
@@ -34,6 +34,13 @@
   min-width: 100%;
   z-index: 2;
   background-color: rgb(152, 160, 169);
+}
+/* dashBoard */
+.submitButton {
+  margin-left: 40%;
+}
+.dashBoardFolder {
+  margin-left: 5vh;
 }
 /* sideNav */
 .sideNav {

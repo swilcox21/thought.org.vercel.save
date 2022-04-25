@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import '../App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import PropTypes from 'prop-types';
 
 function NewThought(props) {
   const [thought, setThought] = useState({ thought: '' });
   const [allFolders, setAllFolders] = useState(props.allFolders);
-  const [folderValue, setFolderValue] = useState('1. tasks');
+  const [folderValue, setFolderValue] = useState('reminders');
   const [folderPlaceholder, setFolderPlaceholder] = useState('');
 
   return (
@@ -28,7 +28,7 @@ function NewThought(props) {
           id="folder"
         />
         <datalist id="folders">
-          {allFolders.lenght > 0 &&
+          {allFolders.length > 0 &&
             allFolders.map((folder) => (
               <div key={folder.id}>
                 <option value={folder.name} />
@@ -48,6 +48,7 @@ function NewThought(props) {
         />
       </div>
       <button
+        className="submitButton"
         onClick={() => {
           props.newThoughtPost(folderValue, thought);
           setThought({ thought: '' });

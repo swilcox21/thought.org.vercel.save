@@ -166,13 +166,12 @@ function App() {
             .map((thot, index) => (
               <div key={thot.id} className="my-3">
                 <Dashboard
-                  // folderPost={folderPost}
                   thoughtPut={thoughtPut}
                   thought={thot}
                   folder={thot.folder}
-                  // allFolders={allFolders}
                   allThoughts={allThoughts}
                   thoughtDelete={thoughtDelete}
+                  allFolders={allFolders}
                 />
                 <br />
               </div>
@@ -185,29 +184,32 @@ function App() {
             allThoughts={allThoughts}
           />
         </div>
-        {/* TASKS DASHBOARD */}
-        {allFolders.length > 0 &&
-          allFolders
-            .filter((folder) => (folder.dashboard === true) & (folder.name === 'tasks'))
-            .map((folder, index) => (
-              <div key={folder.id}>
-                <Folder
+        {/* REMINDERS DASHBOARD */}
+        {allThoughts.length > 0 &&
+          allThoughts
+            .filter(
+              (thought) => (thought.dashboard !== true) & (thought.folder.name === 'reminders'),
+            )
+            .map((thought, index) => (
+              <div key={thought.id}>
+                <Thought
                   folderPost={folderPost}
-                  thoughtPost={thoughtPost}
                   thoughtPut={thoughtPut}
-                  folderPut={folderPut}
-                  folderDelete={folderDelete}
-                  thoughtDelete={thoughtDelete}
-                  folder={folder}
+                  thought={thought}
+                  folder={thought.folder}
                   allFolders={allFolders}
                   allThoughts={allThoughts}
+                  thoughtDelete={thoughtDelete}
                 />
               </div>
             ))}
         {/* ALL OTHER FOLDERS DASHBOARD */}
+        <br />
+        <br />
+        <br />
         {allFolders.length > 0 &&
           allFolders
-            .filter((folder) => (folder.dashboard === true) & (folder.name !== 'tasks'))
+            .filter((folder) => (folder.dashboard === true) & (folder.name !== 'reminders'))
             .map((folder, index) => (
               <div key={folder.id}>
                 <Folder
