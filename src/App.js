@@ -209,6 +209,7 @@ function App() {
         <br />
         <br />
         <br />
+        <div className="borderBottom mb-3"></div>
         {allFolders.length > 0 &&
           allFolders
             .filter((folder) => (folder.dashboard === true) & (folder.name !== 'reminders'))
