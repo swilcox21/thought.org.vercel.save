@@ -34,7 +34,7 @@ function Navbar(props) {
         </div>
       ) : (
         <div className="sideNavClosed">
-          <button className="m-4" onClick={() => setToggle(!toggle)}>
+          <button className="mx-4 mt-4" onClick={() => setToggle(!toggle)}>
             =
           </button>
         </div>

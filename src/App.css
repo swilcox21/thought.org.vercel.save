@@ -1,5 +1,5 @@
 /* .App {
-  text-align: center;
+  margin-top: 50px;
 } */
 
 /* border styles */
@@ -66,11 +66,7 @@
   z-index: 2;
 }
 .sideNavClosed {
-  height: 100%;
   position: fixed;
-  width: fit-content;
-  top: 0;
-  left: 0;
   z-index: 2;
 }
 .scrollbar::-webkit-scrollbar {
