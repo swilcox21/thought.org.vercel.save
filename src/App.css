@@ -2,6 +2,35 @@
   margin-top: 50px;
 } */
 
+/* loginButton*/
+.loginButton {
+  margin: auto;
+  max-width: fit-content;
+}
+.loginContainer {
+  background-color: whitesmoke;
+  min-height: 100vh;
+  min-width: 100%;
+  margin-top: 0;
+  position: fixed;
+}
+.loginCard {
+  text-align: center;
+  width: 30vh;
+  padding-top: 8vh;
+  padding-bottom: 10vh;
+  border: 2px solid gray;
+  border-radius: 50px;
+  margin: auto;
+  background-color: white;
+  margin-top: 25vh;
+}
+/* logoutButton */
+.logoutButton {
+  float: right;
+  margin: 10px;
+}
+
 /* border styles */
 .borderNone {
   border: none;

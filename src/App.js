@@ -7,14 +7,45 @@ import Thought from './components/thought';
 import NewThought from './components/newThought';
 import Navbar from './components/navbar2';
 import Dashboard from './components/dashboard';
+import { gapi } from 'gapi-script';
+import GoogleLogin from 'react-google-login';
+
+const clientId = '1007332775808-q4j6sklcv5oi9stfl9j35etdvorooj9m.apps.googleusercontent.com';
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [allFolders, setAllFolders] = useState([]);
   const [allThoughts, setAllThoughts] = useState([]);
+  const [loginData, setLoginData] = useState(
+    localStorage.getItem('loginData') ? localStorage.getItem('loginData') : null,
+  );
+  // google-login functions
+  const handleFailure = (result) => {
+    alert(result);
+    console.log('handleFailure:', result);
+  };
+  const handleLogin = (res) => {
+    console.log('loginSuccess:', res.profileObj);
+    setLoginData(res.profileObj.email);
+    localStorage.setItem('loginData', res.profileObj.email);
+  };
+
+  // local storage logout function
+  const handleLogout = () => {
+    localStorage.removeItem('loginData');
+    setLoginData(null);
+  };
 
   // onLoad Get Requests
   useEffect(() => {
+    function start() {
+      localStorage.getItem('loginData') && setLoginData(localStorage.getItem('loginData'));
+      gapi.client.init({
+        clientId: clientId,
+        scope: '',
+      });
+    }
+    gapi.load('client:auth2', start);
     axios.get('https://thought-org.herokuapp.com/folder').then(function (response) {
       setAllFolders(response.data);
       console.log(response);
@@ -24,6 +55,7 @@ function App() {
       console.log(response);
     });
   }, []);
+
   // Post Requests
   async function newThoughtPost(name, thought) {
     setLoading(true);
@@ -155,80 +187,109 @@ function App() {
   // HTML code
   return (
     <>
-      <Navbar allFolders={allFolders} folderPut={folderPut} />
-      <div className="App container-fluid col-md-8 col-lg-6 col-xl-5">
-        <br />
-        <br />
-        {/* DASHBOARD */}
-        {allThoughts.length > 0 &&
-          allThoughts
-            .filter((thought) => thought.dashboard === true)
-            .map((thot, index) => (
-              <div key={thot.id} className="my-3">
-                <Dashboard
-                  thoughtPut={thoughtPut}
-                  thought={thot}
-                  folder={thot.folder}
-                  allThoughts={allThoughts}
-                  thoughtDelete={thoughtDelete}
+      {loginData ? (
+        <>
+          <button className="logoutButton" onClick={handleLogout}>
+            logout
+          </button>
+          <Navbar allFolders={allFolders} folderPut={folderPut} />
+          <div className="App container-fluid col-md-8 col-lg-6 col-xl-5">
+            <br />
+            <br />
+            {/* DASHBOARD */}
+            {allThoughts.length > 0 &&
+              allThoughts
+                .filter((thought) => thought.dashboard === true)
+                .map((thot, index) => (
+                  <div key={thot.id} className="my-3">
+                    <Dashboard
+                      thoughtPut={thoughtPut}
+                      thought={thot}
+                      folder={thot.folder}
+                      allThoughts={allThoughts}
+                      thoughtDelete={thoughtDelete}
+                      allFolders={allFolders}
+                    />
+                    <br />
+                  </div>
+                ))}
+            {/* NEW THOUGHT */}
+            <div className="my-3">
+              {allFolders.length > 0 && (
+                <NewThought
+                  newThoughtPost={newThoughtPost}
                   allFolders={allFolders}
+                  allThoughts={allThoughts}
                 />
-                <br />
-              </div>
-            ))}
-        {/* NEW THOUGHT */}
-        <div className="my-3">
-          {allFolders.length > 0 && (
-            <NewThought
-              newThoughtPost={newThoughtPost}
-              allFolders={allFolders}
-              allThoughts={allThoughts}
+              )}
+            </div>
+            {/* REMINDERS DASHBOARD */}
+            {allThoughts.length > 0 &&
+              allThoughts
+                .filter(
+                  (thought) => (thought.dashboard !== true) & (thought.folder.name === 'reminders'),
+                )
+                .map((thought, index) => (
+                  <div key={thought.id}>
+                    <Thought
+                      folderPost={folderPost}
+                      thoughtPut={thoughtPut}
+                      thought={thought}
+                      folder={thought.folder}
+                      allFolders={allFolders}
+                      allThoughts={allThoughts}
+                      thoughtDelete={thoughtDelete}
+                    />
+                  </div>
+                ))}
+            {/* ALL OTHER FOLDERS DASHBOARD */}
+            <br />
+            <br />
+            <br />
+            <div className="borderBottom mb-3"></div>
+            {allFolders.length > 0 &&
+              allFolders
+                .filter((folder) => (folder.dashboard === true) & (folder.name !== 'reminders'))
+                .map((folder, index) => (
+                  <div key={folder.id}>
+                    <Folder
+                      folderPost={folderPost}
+                      thoughtPost={thoughtPost}
+                      thoughtPut={thoughtPut}
+                      folderPut={folderPut}
+                      folderDelete={folderDelete}
+                      thoughtDelete={thoughtDelete}
+                      folder={folder}
+                      allFolders={allFolders}
+                      allThoughts={allThoughts}
+                    />
+                  </div>
+                ))}
+          </div>
+        </>
+      ) : (
+        <div className="loginContainer">
+          <div className="loginCard">
+            <h2>Welcome to Thought.org!</h2>
+            <p>please log in</p>
+            <img
+              src="https://github.com/swilcox21/Thot.Org/blob/main/src/front/img/looping-down-arrows.gif?raw=true"
+              alt=""
             />
-          )}
+            <div className="loginButton">
+              <GoogleLogin
+                clientId={clientId}
+                buttonText="Log in with Google"
+                onSuccess={handleLogin}
+                onFailure={handleFailure}
+                cookiePolicy={'single_host_origin'}
+              ></GoogleLogin>
+            </div>
+            <br />
+            <small>If you do not have google go away</small>
+          </div>
         </div>
-        {/* REMINDERS DASHBOARD */}
-        {allThoughts.length > 0 &&
-          allThoughts
-            .filter(
-              (thought) => (thought.dashboard !== true) & (thought.folder.name === 'reminders'),
-            )
-            .map((thought, index) => (
-              <div key={thought.id}>
-                <Thought
-                  folderPost={folderPost}
-                  thoughtPut={thoughtPut}
-                  thought={thought}
-                  folder={thought.folder}
-                  allFolders={allFolders}
-                  allThoughts={allThoughts}
-                  thoughtDelete={thoughtDelete}
-                />
-              </div>
-            ))}
-        {/* ALL OTHER FOLDERS DASHBOARD */}
-        <br />
-        <br />
-        <br />
-        <div className="borderBottom mb-3"></div>
-        {allFolders.length > 0 &&
-          allFolders
-            .filter((folder) => (folder.dashboard === true) & (folder.name !== 'reminders'))
-            .map((folder, index) => (
-              <div key={folder.id}>
-                <Folder
-                  folderPost={folderPost}
-                  thoughtPost={thoughtPost}
-                  thoughtPut={thoughtPut}
-                  folderPut={folderPut}
-                  folderDelete={folderDelete}
-                  thoughtDelete={thoughtDelete}
-                  folder={folder}
-                  allFolders={allFolders}
-                  allThoughts={allThoughts}
-                />
-              </div>
-            ))}
-      </div>
+      )}
     </>
   );
 }
