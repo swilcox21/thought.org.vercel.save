@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import "./App.css";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import NewThought from "./components/newThought";
+import './App.css';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import NewThought from './components/newThought';
 // import TextareaAutosize from 'react-textarea-autosize';
 
 function Reminders(props) {
@@ -12,9 +12,9 @@ function Reminders(props) {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/reminder/", {
+      .get('https://thoughtorgapi.herokuapp.com/reminder/', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       })
       .then(function (response) {
@@ -23,9 +23,9 @@ function Reminders(props) {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("refresh_token");
-    localStorage.removeItem("access_token");
-    window.location = "http://localhost:3000/";
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('access_token');
+    window.location = 'http://localhost:3000/';
   };
   // async function newThoughtPost(name, thought) {
   //   setLoading(true);
@@ -61,7 +61,7 @@ function Reminders(props) {
       {/* {props.reminders.map((reminder, index) => (
         <div key={reminder.id}>{reminder.reminder}</div>
       ))} */}
-      <button onClick={() => handleLogout()}>HOME</button>
+      <button onClick={() => handleLogout()}>LOGOUT</button>
     </>
   );
 }
